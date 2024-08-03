@@ -133,3 +133,42 @@
     {% endblock %}
     ```
 3. For further reference on the jinja read the documentation: https://jinja.palletsprojects.com/en/2.11.x/templates/
+
+## 6. Connecting the Database Using Flask and Python:
+
+1. Downloading the Xampp Application and Setting it up:
+    https://www.apachefriends.org/download.html
+    ```sh
+    a. Keep the admin and the password default
+    b. Default Admin will be "root"
+    c. Default password will be "blank"
+    ```
+2. Starting the Xampp Control panel:
+    ```sh
+    a. Start the "Apache".
+    b. Start the "MySQl".
+    c. Everything should turn green over the apche and mysql.
+    d. If Something goes wrong then check ( Task Manager>>Details and check the PID).
+    e. End task armsvc.exe and everything should be fine.
+    ```
+4. Opening the database in the browser:
+   http://localhost/phpmyadmin/
+
+## 7. Creating the Database Using Flask and Python:
+
+1. Create a new Database:
+    https://www.apachefriends.org/download.html
+    ```sh
+    a. Go to http://localhost/phpmyadmin/ link, you will see a interface.
+    b. Click on “New” to create a database
+    c. Write your database name
+    d. Create the database
+    ```
+2. Create a new Table in the database:
+    ```sh
+    a. Click on “Create”.
+    b. Fill the table according to need.
+    c. A_I section for thr primary key. A_I stands for Auto Incrementation. It means it will automatically increment value so that there is no repetition.
+    ```
+ 
+   
