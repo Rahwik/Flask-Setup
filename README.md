@@ -72,7 +72,7 @@
     ```
 3. Importing the and Using of teh templates folder:
     ```sh
-    a. " render_template " command is used to import the templates.
+    a. " from flask import Flask, render_template " command is used to import the templates.
     b. We use the return function to show the templates folder during the app run.
     c. return render_template('index.html')
     d. We can also use multiple html files by adding the route.
@@ -89,5 +89,46 @@
        return render_template('index.html', name=variable)
     b. Then to display it in the html file:
        {{name}} inside any tag
-    ```                
-    
+    ```
+## 4. Utilization of the Static folder:
+
+1. Using the jinja(url_for):
+    ```sh
+    Normal way:
+    <img src=”static/img_name.png”>
+    using the jinja:
+    <img src="{{ url_for('static', filename='img_name.png') }}">
+                                OR
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    ```
+2. Using the jinja(for loop):
+    ```sh
+    <ul>
+    {% for user in users %}
+       <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+    {% endfor %}
+    </ul>
+    ```
+## 5. Template Inheritance in jinja:
+
+1. Base html file format for the Inheritance:
+    ```sh
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>HTML Page</title>
+    </head>
+   {% block body %} {% endblock %}
+   </html>
+    ```
+2. All the Inheritating classes:
+    ```sh
+    {% extends "Base.html" %}
+    {% block body %}
+    <body>
+         <!-- All content here -->
+    </body>
+    {% endblock %}
+    ```   
