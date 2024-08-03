@@ -57,5 +57,37 @@
 4. Terminate the server in the cmd:
     ```sh
     Ctrl + C
-    ```    
+    ```
+## 3. Utilization of the Basic Web Components:
+
+1. Creating the basic folder to start:
+    ```sh
+    static and templates
+    ```
+2. Properties of the folders created:
+    ```sh
+    a. Static folder is public in nature.
+    b. Templates folder is private in nature.
+    c. All the web components are created in the templates folder.(html, css, js)
+    ```
+3. Importing the and Using of teh templates folder:
+    ```sh
+    a. " render_template " command is used to import the templates.
+    b. We use the return function to show the templates folder during the app run.
+    c. return render_template('index.html')
+    d. We can also use multiple html files by adding the route.
+    e. @app.route("/name of the route")
+    ```
+4. Dyanmaically updating the preview during the production:
+    ```sh
+    app.run(debug=True){ for real time changes}
+    ```
+5. Passing of Variables to the html file:
+    ```sh
+    a. Firstly in the app.py:
+       variable="Rahul"
+       return render_template('index.html', name=variable)
+    b. Then to display it in the html file:
+       {{name}} inside any tag
+    ```                
     
