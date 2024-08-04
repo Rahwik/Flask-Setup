@@ -157,7 +157,6 @@
 ## 7. Creating the Database Using Flask and Python:
 
 1. Create a new Database:
-    https://www.apachefriends.org/download.html
     ```sh
     a. Go to http://localhost/phpmyadmin/ link, you will see a interface.
     b. Click on “New” to create a database
