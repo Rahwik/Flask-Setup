@@ -169,7 +169,7 @@
     b. Fill the table according to need.
     c. A_I section for thr primary key. A_I stands for Auto Incrementation. It means it will automatically increment value so that there is no repetition.
     ```
-## 8. Flask QLAlchemy and inputing data to Database:
+## 8. Flask SQLAlchemy and inputing data to Database:
 
 1. Install flask-sqlalchemy in the system.
    ```sh
