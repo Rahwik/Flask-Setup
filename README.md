@@ -279,6 +279,51 @@
 
    app.run(debug=True)
    ```
+## 10. Making Parameters Configurable in Flask:
+
+1. We will configure the Paramerters using the config.json .
+2. Firtsly we will create a config.json in the project directory.
+3. In the json file we will implement the configurationa s follows:
+   ```sh
+   {
+    "params": {
+        "websitename": "Flask-Project"
+    }
+   }
+   ```
+4. In the main.py file we will import the json file as follows:
+    ```sh
+    import json
+    with open('config.json', 'r') as c:
+        params = json.load(c)["params"]
+    ```
+5. Now we can simply use the json file to pass the parameters as we pass the variables:
+    ```sh
+    params['websitename']
+    ```
+6. Passing the json file to html to implement the configuration:
+    ```sh
+    @app.route("/")
+    def home():
+        return render_template('index.html', params=params)
+    ```
+7. Implementing the json parameter in the HTML:
+    ```sh
+    <h1>{{params['websitename']}}</h1>
+    ```
+8. We can do the same for the links and any other variables that are needed:
+    ```sh
+    pip install Flask
+    ```
+9. In order to redirect the form data to the mail we can use te following code to so:
+    ```py
+    mail.send_message('New message from ' + name,
+                          sender=email,
+                          recipients = [params['gmail-user']],
+                          body = message + "\n" + phone
+                          )
+    ```
+    The above code is added to the if condition of the POST and GET class.
 
 
 
