@@ -169,5 +169,117 @@
     b. Fill the table according to need.
     c. A_I section for thr primary key. A_I stands for Auto Incrementation. It means it will automatically increment value so that there is no repetition.
     ```
- 
+## 8. Flask QLAlchemy and inputing data to Database:
+
+1. Install flask-sqlalchemy in the system.
+   ```sh
+    pip install flask-sqlalchemy
+    or
+    pip install flask_sqlalchemy
+    ```
+2. Import this module in the python file.
+   ```sh
+   from flask_sqlalchemy import SQLAlchemy
+   ```
+3. To connect with the database first we have to give database’s address.
+   ```sh
+   app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/db_name'
+   ```
+4. If do not set the user or the password during the installtion of the xammp the default values are:
+    ```sh
+    username: root
+    password: BLANK
+    db_name: is the database name which we have setup
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/DATABASENAME'
+    It should look shomething like this once configured.
+    ```
+6. Importing the class and object from the sqlalchemy and to do so we have to make a variable:
+    ```sh
+    db = SQLAlchemy(app)
+    ```
+7. Once we have connected to the database we need to access the table in the python file:
+    ```sh
+    class Contacts(db.Model):
+       sno = db.Column(db.Integer, primary_key=True)
+       name = db.Column(db.String(80), nullable=False)
+       phone_num = db.Column(db.String(12), nullable=False)
+       msg = db.Column(db.String(120), nullable=False)
+       date = db.Column(db.String(12), nullable=True)
+       email = db.Column(db.String(20), nullable=False)
+    ```
+## 9. POST request in contact form:
+
+1. Basic structure of a post request:
+    ```sh
+    @app.route("/contact", methods = ['GET', 'POST'])
+    def contact():
+        return render_template('index.html')
+    ```
+5. Implementation of the POST method:
+    ```sh
+    @app.route("/contact", methods = ['GET', 'POST'])
+    def contact():
+       if(request.method=='POST'):
+            '''Fetch data and add it to the database'''
+       return render_template('index.html')
+    ```
+6. Fetch data from the form and send to the database:
+    ```sh
+    a. First add name attribute to the html:
+       <input name="email" type="email" placeholder="Email Address">
+    b. We use the name attribute to locate the data from the form and send to data base:
+       @app.route("/contact", methods = ['GET', 'POST'])
+       def contact():
+          if(request.method=='POST'):
+            '''Add entry to the database'''
+             name = request.form.get('name')
+             email = request.form.get('email')
+             phone = request.form.get('phone')
+             message = request.form.get('message')
+             entry = Contacts(name=name, phone_num = phone, msg = message, date= 
+             datetime.now(),email = email )
+             db.session.add(entry)
+             db.session.commit()
+        return render_template('contact.html')
+    c. Now to we need to add method and action in te html file, like this:
+       <form name="sentMessage" action = "/contact" method="post" novalidate>
+    ```
+7. After everything the main.py file should look something like this :
+   ```sh
+   from flask import Flask, render_template, request
+   from flask_sqlalchemy import SQLAlchemy
+   from datetime import datetime
+
+   app = Flask(__name__)
+   app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/codingthunder'
+   db = SQLAlchemy(app)
+
+
+   class Contacts(db.Model):
+      sno = db.Column(db.Integer, primary_key=True)
+      name = db.Column(db.String(80), nullable=False)
+      phone_num = db.Column(db.String(12), nullable=False)
+      msg = db.Column(db.String(120), nullable=False)
+      date = db.Column(db.String(12), nullable=True)
+      email = db.Column(db.String(20), nullable=False)
+
+   @app.route("/", methods = ['GET', 'POST'])
+   def contact():
+      if(request.method=='POST'):
+        '''Add entry to the database'''
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        message = request.form.get('message')
+        entry = Contacts(name=name, phone_num = phone, msg = message, date= datetime.now(),email = email )
+        db.session.add(entry)
+        db.session.commit()
+    return render_template('contact.html')
+
+
+   app.run(debug=True)
+   ```
+
+
+
    
