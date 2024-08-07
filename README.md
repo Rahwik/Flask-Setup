@@ -324,7 +324,98 @@
                           )
     ```
     The above code is added to the if condition of the POST and GET class.
-
-
-
    
+## 11. Sending Emails Using Flask:
+
+1. Install Flask library in the system.
+2. Link for the documentation : https://pythonhosted.org/Flask-Mail/ .
+3. Setting up Flask-Mail:
+   ```sh
+   from flask_mail import Mail
+   ```
+5. Code to configure Flask-mail in main.py:
+    ```sh
+    app.config.update(
+       MAIL_SERVER = 'smtp.gmail.com',
+       MAIL_PORT = '465',
+       MAIL_USE_SSL = True,
+       MAIL_USERNAME = params['gmail-user'],
+       MAIL_PASSWORD = params['gmail-password']
+    )
+    mail = Mail(app)
+    ```
+6. Sending Message through Flask-Mail:
+    ```sh
+    mail.send_message()
+    ```
+7. Configure the function file to send the mail:
+    ```sh
+    mail.send_message('New message from ' + name,
+       sender = "sender's email",
+       recipients = "your-email",
+       body = "message",
+    )
+    ```
+## 12. Fteching data from the Database:
+
+1. Getting data from the database table:
+   ```sh
+   class Posts(db.Model):
+       sno = db.Column(db.Integer, primary_key=True)
+       title = db.Column(db.String(80), nullable=False)
+       slug = db.Column(db.String(21), nullable=False)
+       content = db.Column(db.String(120), nullable=False)
+       date = db.Column(db.String(12), nullable=True)
+       img_file = db.Column(db.String(12), nullable=True)
+   ```
+2. Filtering the data :
+   ```sh
+   @app.route("/post/<string:post_slug>", methods=['GET'])
+   def post_route(post_slug):
+       return render_template('post.html', params=params)
+    ```
+4. Making a Slug from the webpage:
+   ```sh
+   @app.route("/post/<string:post_slug/", methods=['GET'])
+   def post_route(post_slug):
+      post = Posts.query.filter_by(slug=post_slug).first()
+      return render_template('post.html', params=params, post=post)
+   ```
+5. Code to configure Flask-mail in main.py:
+    ```sh
+    app.config.update(
+       MAIL_SERVER = 'smtp.gmail.com',
+       MAIL_PORT = '465',
+       MAIL_USE_SSL = True,
+       MAIL_USERNAME = params['gmail-user'],
+       MAIL_PASSWORD = params['gmail-password']
+    )
+    mail = Mail(app)
+    ```
+6. Displaying the post on the html file:
+    ```sh
+    <h1>{{post.title}}</h1>
+    ```
+## 13. Flitering the data on the webpage to be displayed:
+
+1. Filtering and sending posts to HTMl:
+   ```sh
+   posts = Posts.query.filter_by().all()
+   or
+   posts = Posts.query.filter_by().all()[0:5]
+   or
+   posts = Posts.query.filter_by().all()[0:params['no_of_posts']]
+   ```
+2. To pass the filtered list we have to do the following using a new class :
+   ```sh
+   @app.route("/")
+   def home():
+       posts = Posts.query.filter_by().all()[0:params['no_of_posts']]
+       return render_template('index.html', params=params, posts=posts)
+    ```
+4. Using for loop in HTML:
+   ```sh
+   {% for user in users %}
+       <li><a href="{{ user.url }}">{{ user.username }}</a></li>
+   {% endfor %}
+   ```
